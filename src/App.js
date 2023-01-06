@@ -5,7 +5,7 @@ function App() {
   const [calories, setCalories] = useState("");
 
   useEffect(() => {
-    console.log(calories);
+    console.log("calories", calories);
   }, [calories]);
 
   return (
