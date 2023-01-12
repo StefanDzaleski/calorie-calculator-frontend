@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import axiosInstance from "./axiosInstance";
@@ -21,6 +20,17 @@ function App() {
       });
   };
 
+  const getItems = () => {
+    axiosInstance
+      .get("http://localhost:3001/get-items")
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">Calorie calculator app</header>
@@ -29,6 +39,7 @@ function App() {
         onChange={(event) => setCalories(event.target.value)}
       />
       <button onClick={() => addItem()}>Add item</button>
+      <button onClick={() => getItems()}>Get items</button>
     </div>
   );
 }
