@@ -4,11 +4,22 @@ import axiosInstance from "./axiosInstance";
 import TextInput from "./FormItems/TextInput/TextInput";
 
 function App() {
-  const addIngredient = (values: any) => {
+  const initialValues = {
+    name: "",
+    calories: "",
+    carbohydrates: "",
+    sugars: "",
+    proteins: "",
+    fat: "",
+    fiber: "",
+  };
+
+  const addIngredient = (values: any, helpers: any) => {
     axiosInstance
       .post("/add-ingredient", { values })
       .then(function (response) {
         console.log(response);
+        helpers.resetForm({ values: initialValues });
       })
       .catch(function (error) {
         console.log(error);
@@ -27,8 +38,6 @@ function App() {
   //     });
   // };
 
-  const initialValues = {};
-
   return (
     <div className="App">
       <header className="App-header"> Calorie calculator app </header>{" "}
@@ -40,13 +49,13 @@ function App() {
       {/* <button onClick={() => getItems()}> Get items </button>{" "} */}
       <Formik onSubmit={addIngredient} initialValues={initialValues}>
         <Form>
-          <TextInput name="name"/>
-          <TextInput name="calories"/>
-          <TextInput name="carbohydrates"/>
-          <TextInput name="sugars"/>
-          <TextInput name="proteins"/>
-          <TextInput name="fat"/>
-          <TextInput name="fiber"/>
+          <TextInput name="name" />
+          <TextInput name="calories" />
+          <TextInput name="carbohydrates" />
+          <TextInput name="sugars" />
+          <TextInput name="proteins" />
+          <TextInput name="fat" />
+          <TextInput name="fiber" />
           <button type="submit">Submit</button>
         </Form>
       </Formik>
