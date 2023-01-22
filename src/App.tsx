@@ -4,9 +4,9 @@ import axiosInstance from "./axiosInstance";
 import TextInput from "./FormItems/TextInput/TextInput";
 
 function App() {
-  const addItem = (values: any) => {
+  const addIngredient = (values: any) => {
     axiosInstance
-      .post("http://localhost:3001/add-item", { values })
+      .post("http://localhost:3001/add-ingredient", { values })
       .then(function (response) {
         console.log(response);
       })
@@ -38,7 +38,7 @@ function App() {
       />{" "} */}
       {/* <button onClick={() => addItem()}> Add item </button>{" "} */}
       {/* <button onClick={() => getItems()}> Get items </button>{" "} */}
-      <Formik onSubmit={addItem} initialValues={initialValues}>
+      <Formik onSubmit={addIngredient} initialValues={initialValues}>
         <Form>
           <TextInput name="name"/>
           <TextInput name="calories"/>
