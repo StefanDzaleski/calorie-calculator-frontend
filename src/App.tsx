@@ -6,7 +6,7 @@ import TextInput from "./FormItems/TextInput/TextInput";
 function App() {
   const addIngredient = (values: any) => {
     axiosInstance
-      .post("https://calorie-calculator-backend.vercel.app/add-ingredient", { values })
+      .post("/add-ingredient", { values })
       .then(function (response) {
         console.log(response);
       })
