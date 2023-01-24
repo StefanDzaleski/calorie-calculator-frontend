@@ -3,14 +3,15 @@ import { useField } from "formik";
 
 interface Props {
   name: string;
+  mealIngredient?: boolean;
 }
 
-const TextInput: FunctionComponent<Props> = ({ name }) => {
+const TextInput: FunctionComponent<Props> = ({ name, mealIngredient }) => {
   const [field] = useField({ name });
 
   return (
     <div>
-      <label htmlFor={name}>{name}: </label>
+      <label>{mealIngredient ? "Ingredient" : name}: </label>
       <input {...field} />
     </div>
   );
