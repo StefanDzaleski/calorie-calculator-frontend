@@ -7,3 +7,5 @@ export const ingredientProperties = [
   "far",
   "fiber",
 ];
+
+export const initialIngredient = { ingredient: "", quantity: "" };

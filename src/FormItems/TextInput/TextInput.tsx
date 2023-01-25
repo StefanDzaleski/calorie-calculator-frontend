@@ -1,19 +1,24 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useField } from "formik";
+import TextField from "@mui/material/TextField";
 
 interface Props {
   name: string;
-  mealIngredient?: boolean;
+  prefix?: string;
+  label?: string;
 }
 
-const TextInput: FunctionComponent<Props> = ({ name, mealIngredient }) => {
-  const [field] = useField({ name });
+const TextInput: FunctionComponent<Props> = ({ name, prefix, label }) => {
+  const fieldName = prefix ? `${prefix}.${name}` : name;
+  const [field] = useField(fieldName);
 
   return (
-    <div>
-      <label>{mealIngredient ? "Ingredient" : name}: </label>
-      <input {...field} />
-    </div>
+    <TextField
+      id="outlined-basic"
+      label={label ? label : name}
+      variant="outlined"
+      {...field}
+    />
   );
 };
 

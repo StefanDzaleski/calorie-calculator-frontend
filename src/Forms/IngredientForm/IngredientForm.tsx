@@ -21,7 +21,9 @@ function IngredientForm() {
     <Formik onSubmit={addIngredient} initialValues={ingredientInitialValues}>
       <Form>
         {ingredientProperties.map((property) => (
-          <TextInput key={property} name={property} />
+          <div key={property}>
+            <TextInput name={property} />
+          </div>
         ))}
         <button type="submit">Submit ingredient</button>
       </Form>

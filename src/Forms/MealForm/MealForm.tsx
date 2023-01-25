@@ -1,14 +1,24 @@
 import { Formik, Form, FieldArray } from "formik";
+import { FunctionComponent } from "react";
 import axiosInstance from "../../axiosInstance";
+import MealIngredient from "../../FormItems/MealIngredient/MealIngredient";
 import TextInput from "../../FormItems/TextInput/TextInput";
+import { initialIngredient } from "../../utils/IngredientProperties";
 
-function MealForm() {
+interface Props {
+  // Interface to be added
+  ingredientList: any[];
+}
+
+const MealForm: FunctionComponent<Props> = ({ ingredientList }) => {
   const addMeal = (values: any, helpers: any) => {
     axiosInstance
       .post("/add-meal", { values })
       .then(function (response) {
         console.log(response);
-        helpers.resetForm({ values: { type: "", ingredients: [""] } });
+        helpers.resetForm({
+          values: { type: "", ingredients: [initialIngredient] },
+        });
       })
       .catch(function (error) {
         console.log(error);
@@ -16,25 +26,34 @@ function MealForm() {
   };
 
   return (
-    <Formik onSubmit={addMeal} initialValues={{ type: "", ingredients: [""] }}>
+    <Formik
+      onSubmit={addMeal}
+      initialValues={{
+        type: "",
+        ingredients: [initialIngredient],
+      }}
+    >
       {({ values }) => (
         <Form>
-          <TextInput name={`type`} />
+          <TextInput name={`type`} prefix={""} />
           <FieldArray
             name="ingredients"
             render={(arrayHelpers) => (
               <div>
                 {values.ingredients.map((ingredient, index) => (
-                  <TextInput
-                    key={`ingredient${index}`}
-                    name={`ingredients[${index}]`}
-                    mealIngredient={true}
+                  <MealIngredient
+                    key={`ingredients${index}`}
+                    prefix={`ingredients[${index}]`}
+                    ingredientsList={ingredientList}
                   />
                 ))}
                 <button
                   type="button"
                   onClick={() =>
-                    arrayHelpers.insert(values.ingredients.length, "")
+                    arrayHelpers.insert(
+                      values.ingredients.length,
+                      initialIngredient
+                    )
                   }
                 >
                   Add ingredient
@@ -47,6 +66,6 @@ function MealForm() {
       )}
     </Formik>
   );
-}
+};
 
 export default MealForm;
