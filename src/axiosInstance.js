@@ -1,12 +1,20 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "https://calorie-calculator-backend.vercel.app",
-  // baseURL: "http://localhost:3001",
+// const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://calorie-calculator-backend.vercel.app";
+
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    timeout: 1000,
   },
+  withCredentials: true,
 });
 
-export default axiosInstance;
+export const axiosPrivate = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});

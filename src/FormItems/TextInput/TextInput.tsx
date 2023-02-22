@@ -1,4 +1,3 @@
-import { FunctionComponent } from "react";
 import { useField } from "formik";
 import TextField from "@mui/material/TextField";
 
@@ -6,20 +5,21 @@ interface Props {
   name: string;
   prefix?: string;
   label?: string;
+  type?: string;
 }
 
-const TextInput: FunctionComponent<Props> = ({ name, prefix, label }) => {
+function TextInput({ name, prefix, label, type }: Props) {
   const fieldName = prefix ? `${prefix}.${name}` : name;
   const [field] = useField(fieldName);
 
   return (
     <TextField
-      id="outlined-basic"
       label={label ? label : name}
       variant="outlined"
+      type={type}
       {...field}
     />
   );
-};
+}
 
 export default TextInput;

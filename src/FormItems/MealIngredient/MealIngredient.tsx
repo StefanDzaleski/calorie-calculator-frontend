@@ -1,7 +1,6 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { getIn, useFormikContext } from "formik";
-import { FunctionComponent } from "react";
 import TextInput from "../TextInput/TextInput";
 
 interface Props {
@@ -10,10 +9,7 @@ interface Props {
   ingredientsList: any[];
 }
 
-const MealIngredient: FunctionComponent<Props> = ({
-  prefix,
-  ingredientsList,
-}) => {
+function MealIngredient({ prefix, ingredientsList }: Props) {
   const fieldName = prefix ? `${prefix}.ingredient` : "ingredient";
   const { values, setFieldValue } = useFormikContext();
   const value = getIn(values, fieldName);
@@ -31,6 +27,6 @@ const MealIngredient: FunctionComponent<Props> = ({
       <TextInput name={"quantity"} prefix={prefix} label={"Quantity"} />
     </div>
   );
-};
+}
 
 export default MealIngredient;
