@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import TextInput from "../../FormItems/TextInput/TextInput";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../axiosInstance";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../userSlice";
 
@@ -13,6 +13,15 @@ function Login() {
   const [persist, setPersist] = useState(!!localStorage.getItem("persist"));
 
   const from = location.state?.from?.pathname || "/new-ingredient";
+
+  useEffect(() => {
+    axiosInstance
+      .get("/")
+      .then(function (response) {
+        console.log("Response: ", response);
+      })
+      .catch(function (error) {});
+  }, []);
 
   function handlePersist() {
     const oldPersist = persist;
